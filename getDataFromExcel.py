@@ -7,14 +7,11 @@ df = pd.read_excel('excel.xlsx')
 
 translations_vi = {}
 translations_lo = {}
-def translate_language(language,key):
+def translate_language(language, key):
     key = key.replace('\n', ' ').replace('\r', ' ').replace('\"', "'").replace('_', ' ')
     translator = Translator()
     translation = translator.translate(key, dest=language)
-    translated_text = translation.text
-    print(f"Translated text: {key} - {translated_text} - {language} ")
-    if translated_text == '':
-        translated_text = key
+    translated_text = translation.text if translation.text != '' else key
     return translated_text
 
 for index, row in df.iterrows():
